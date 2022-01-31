@@ -20,7 +20,7 @@
 
 <el-table-column label="操作" width="160">
    <template slot-scope="scope">
-    <el-button size="mini" type="primary" plain @click = "delete(scope.row.pk)">删除</el-button>
+    <el-button size="mini" type="primary" plain @click = "delete_book(scope.row.pk)">删除</el-button>
    </template>
    </el-table-column>
 </el-table>
@@ -42,9 +42,9 @@ export default {
   },
   methods: {
 
-    delete(id){
+    delete_book(id){
       alert(id)
-      this.$http.get('http://127.0.0.1:8000/api/delete_book?id=' + id)
+      this.$http.get('http://127.0.0.1:8000/backend/delete_book?id=' + id)
         .then((response) => {
           var res = JSON.parse(response.bodyText)
           if (res.error_num === 0) {
@@ -56,7 +56,7 @@ export default {
         })
     },
     addBook () {
-      this.$http.get('http://127.0.0.1:8000/api/add_book?book_name=' + this.input)
+      this.$http.get('http://127.0.0.1:8000/backend/add_book?book_name=' + this.input)
         .then((response) => {
           var res = JSON.parse(response.bodyText)
           if (res.error_num === 0) {
@@ -68,7 +68,7 @@ export default {
         })
     },
     showBooks () {
-      this.$http.get('http://127.0.0.1:8000/api/show_books')
+      this.$http.get('http://127.0.0.1:8000/backend/show_books')
         .then((response) => {
           var res = JSON.parse(response.bodyText)
           console.log(res)
